@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:models="clr-namespace:AppTestOrdering.Models" 
+             xmlns:controls="clr-namespace:AppTestOrdering.Views.Controls"
+             x:Class="AppTestOrdering.Views.SelectItems">
+    <ContentPage.Content>
+        <StackLayout>
+            <CollectionView x:Name="MonkeysList"
+                            BackgroundColor="White"
+                            ItemsSource="{Binding ListMonkeys, Mode=TwoWay}"  
+                            SelectionMode="Multiple"
+                            SelectedItems="{Binding SelectedListMonkeys, Mode=TwoWay}"
+                            SelectionChangedCommand="{Binding Path=BindingContext.SelectionMonkeyChangedCommand, Source={x:Reference MonkeysList}}"
+                            SelectionChangedCommandParameter="{Binding .}">
+                <CollectionView.Header>
+                    <Label Text="Select as much monkeys you want" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Monkey">
+                        <StackLayout Padding="10">
+                            <controls:MonkeyListTemplate/>
+                        </StackLayout>
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+                <CollectionView.Footer>
+                    <Label Text="Something related to a footer test..." HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                </CollectionView.Footer>
+
+
+
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

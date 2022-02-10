@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:rcv="clr-namespace:ReorderableCollectionView.Forms;assembly=ReorderableCollectionView.Forms" 
+             xmlns:models="clr-namespace:AppTestOrdering.Models" 
+             xmlns:controls="clr-namespace:AppTestOrdering.Views.Controls"
+             BackgroundColor="White"
+             x:Class="AppTestOrdering.Views.MainPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding OpenListMonkeysCommand}" Text="Select monkeys"/>
+    </ContentPage.ToolbarItems>
+
+    <rcv:ReorderableCollectionView ItemsSource="{Binding SelectedListMonkeys, Mode=TwoWay}"
+                                   CanReorderItems="True"
+                                   SelectionMode="None"
+                                   Grid.Row="1">
+
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+        </CollectionView.ItemsLayout>
+
+        <rcv:ReorderableCollectionView.EmptyView>
+            <Label Text="You need to add monkeys so we can order them..." VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="Black" FontAttributes="Italic"/>
+        </rcv:ReorderableCollectionView.EmptyView>
+        
+        <rcv:ReorderableCollectionView.Header>
+            <Grid ColumnDefinitions="80*, 20*" Padding="20">
+                <Label Text="Something related to a header test..." HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
+            </Grid>
+        </rcv:ReorderableCollectionView.Header>
+
+        <rcv:ReorderableCollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:Monkey">
+                <StackLayout Padding="10">
+                    <controls:MonkeyListTemplate/>
+                </StackLayout>
+            </DataTemplate>
+        </rcv:ReorderableCollectionView.ItemTemplate>
+
+
+        <rcv:ReorderableCollectionView.Footer>
+            <StackLayout>
+                <Label Text="Something related to a footer test..." HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                <Button Text="Check all monkeys..." Command="{Binding FinishProcessCommand}"/>
+            </StackLayout>
+        </rcv:ReorderableCollectionView.Footer>
+    </rcv:ReorderableCollectionView>
+
+</ContentPage>
